@@ -43,6 +43,12 @@ while True:
             encoded_text = input("Введите закодированный текст: ")
             decoded_text = huffman_coder.decode_huffman(encoded_text)
             print(f"Декодированный текст: {decoded_text}")
+            save_choice=input("Хотите схранить файл (y/n)?: ")
+            if save_choice.lower() == "y":
+                output_file_path = input("Введите путь для сохранения декодированного текста: ")
+            with open(output_file_path, "w", encoding="utf-8") as output_file:
+                output_file.write(decoded_text)
+                print("Декодированный текст сохранен в файл.")
 
         elif choice == "3":
             input_file_path = input("Введите путь к исходному файлу: ")

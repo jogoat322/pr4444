@@ -39,7 +39,7 @@ class HuffmanCoding:
         with open(code_file_path, "w") as code_file:
             json.dump(dict(self.huffman_code), code_file, ensure_ascii=False, indent=4)
 
-        print(f"Huffman code saved in {code_file_path}")
+        print(f"Код Хаффмана сохранен в: {code_file_path}")
 
     def decode_huffman(self, encoded_text):
         reversed_huffman_code = {code: char for char, code in dict(self.huffman_code).items()}
