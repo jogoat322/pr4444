@@ -14,7 +14,7 @@ while True:
         choice = input("Выберите действие (1, 2, 3 или 4): ")
 
         if choice == "1":
-            input_file_name = input("Введите имя файла: ")
+            input_file_name = input("Введите путь до файла: ")
 
             try:
                 with open(input_file_name, "r", encoding="utf-8") as file:
