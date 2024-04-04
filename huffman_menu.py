@@ -1,6 +1,7 @@
 
 from huffman_functions import *
 import json
+import os
 huffman_coder = HuffmanCoding()
 
 
@@ -10,8 +11,8 @@ while True:
         print("2. Декодирование Huffman")
         print("3. Вывод информации о файлах")
         print("4. Завершить программу")
-
-        choice = input("Выберите действие (1, 2, 3 или 4): ")
+        print("5. Удаление выбранного файла")
+        choice = input("Выберите действие (1, 2, 3 или 4, 5): ")
 
         if choice == "1":
             input_file_name = input("Введите путь до файла: ")
@@ -77,7 +78,15 @@ while True:
         elif choice == "4":
             print("Программа завершена.")
             break
-
+        
+        
+        elif choice == "5":
+            file_to_delete = input("Введите путь к файлу, который хотите удалить: ")
+            try:
+                os.remove(file_to_delete)
+                print("Файл успешно удален.")
+            except FileNotFoundError:
+                print("Файл не найден.")
         else:
             print("Неверный выбор. Выберите 1, 2, 3 или 4.")
 

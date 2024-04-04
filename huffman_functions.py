@@ -10,24 +10,27 @@ class HuffmanCoding:
         self.huffman_code = None
 
     def generate_huffman_code(self, text):
-        frequency = defaultdict(int)
+        frequency = defaultdict(int) #словарь типа defaultdict
 
-        for char in text:
+        #проход по славорю с увеличением узлов
+        for char in text: 
             frequency[char] += 1
-
+        
+        #создания heap некого списка списков
         heap = [[weight, [symbol, ""]] for symbol, weight in frequency.items()]
+        #необхадимая строка для создания min-heap
         heapq.heapify(heap)
 
         while len(heap) > 1:
-            lo = heapq.heappop(heap)
+            lo = heapq.heappop(heap) #извлечение с минимальными частотами(узлами)
             hi = heapq.heappop(heap)
-            for pair in lo[1:]:
+            for pair in lo[1:]: #левый узел дерева
                 pair[1] = '0' + pair[1]
-            for pair in hi[1:]:
+            for pair in hi[1:]:#правый узел
                 pair[1] = '1' + pair[1]
-            heapq.heappush(heap, [lo[0] + hi[0]] + lo[1:] + hi[1:])
+            heapq.heappush(heap, [lo[0] + hi[0]] + lo[1:] + hi[1:]) #конечный узел со всей суммой
 
-        self.huffman_code = sorted(heapq.heappop(heap)[1:], key=lambda p: (len(p[-1]), p))
+        self.huffman_code = sorted(heapq.heappop(heap)[1:], key=lambda p: (len(p[-1]), p))#сортированный по длине и самому коду
 
     def save_huffman_code_to_json(self):
         timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -49,6 +52,7 @@ class HuffmanCoding:
         for bit in encoded_text:
             current_code += bit
             if current_code in reversed_huffman_code:
+                #если текущий код есть в обратном отображении, соответствующий ему символ добавляется к раскодированному тексту
                 decoded_text += reversed_huffman_code[current_code]
                 current_code = ""
 
